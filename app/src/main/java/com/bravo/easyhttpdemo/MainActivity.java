@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Class<User> resultClass = User.class;
-                String url = "http://192.168.0.110:8080/json/user.json";
+                String url = "http://gank.io/api/data/Android/10/1";
                 RequestParams requestParams = new RequestParams();
                 EasyHttp.sendRequest(requestParams, resultClass, url, new IDataListener<User>() {
 

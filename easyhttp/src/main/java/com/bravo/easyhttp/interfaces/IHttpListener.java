@@ -10,7 +10,6 @@ import java.io.InputStream;
 
 public interface IHttpListener {
 
-//    void onSuccess(InputStream inputStream);
     void onSuccess(HttpEntity entity);
 
     void onFailed();

@@ -34,12 +34,10 @@ class JsonHttpListener<R> implements IHttpListener {
 
     @Override
     public void onSuccess(HttpEntity entity) {
-        Log.e(TAG, "responeseStr : inputStream");
         InputStream inputStream = null;
         try {
             inputStream = entity.getContent();
             String responeseStr = getContent(inputStream);
-            Log.e(TAG, "responeseStr     : " + responeseStr);
             final R r = JSON.parseObject(responeseStr, responeseClass);
             handler.post(new Runnable() {
                 @Override
@@ -69,7 +67,7 @@ class JsonHttpListener<R> implements IHttpListener {
     private String getContent(InputStream inputStream) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder sb = new StringBuilder();
-        String line = null;
+        String line;
         while ((line = reader.readLine()) != null) {
             sb.append(line + "\n");
         }

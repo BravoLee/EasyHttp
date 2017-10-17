@@ -1,5 +1,7 @@
 package com.bravo.easyhttp;
 
+import android.util.Log;
+
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
@@ -13,6 +15,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class ThreadPoolManager {
+    private static final String TAG = "bravo";
     private static ThreadPoolManager instance = new ThreadPoolManager();
     LinkedBlockingQueue<FutureTask<?>> linkedBlockingQueue = new LinkedBlockingQueue<>();
     private final ThreadPoolExecutor threadPoolExecutor;
@@ -48,7 +51,6 @@ public class ThreadPoolManager {
         public void run() {
             while (true){
                 FutureTask<?> futureTask = null;
-
                 try {
                     futureTask = linkedBlockingQueue.take();
                 } catch (InterruptedException e) {
@@ -56,8 +58,11 @@ public class ThreadPoolManager {
                 }
 
                 if (futureTask != null){
+                    Log.e(TAG,"执行一个任务。");
                     threadPoolExecutor.execute(futureTask);
                 }
+
+                Log.e(TAG,"线程池大小      "+threadPoolExecutor.getPoolSize());
             }
         }
     };

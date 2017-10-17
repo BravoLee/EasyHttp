@@ -2,6 +2,7 @@ package com.bravo.easyhttp;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.bravo.easyhttp.interfaces.IDataListener;
@@ -20,6 +21,7 @@ import java.io.InputStreamReader;
 
 class JsonHttpListener<R> implements IHttpListener {
 
+    private static final String TAG = "bravo";
     private Class<R> responeseClass;
     private IDataListener<R> iDataListener;
 
@@ -31,11 +33,13 @@ class JsonHttpListener<R> implements IHttpListener {
     }
 
     @Override
-    public void onSuccess(HttpEntity httpEntity) {
+    public void onSuccess(HttpEntity entity) {
+        Log.e(TAG, "responeseStr : inputStream");
         InputStream inputStream = null;
         try {
-            inputStream = httpEntity.getContent();
+            inputStream = entity.getContent();
             String responeseStr = getContent(inputStream);
+            Log.e(TAG, "responeseStr     : " + responeseStr);
             final R r = JSON.parseObject(responeseStr, responeseClass);
             handler.post(new Runnable() {
                 @Override

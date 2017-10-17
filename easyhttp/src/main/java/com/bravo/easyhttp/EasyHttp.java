@@ -30,7 +30,7 @@ public class EasyHttp {
 
         HttpTask<T> httpTask = new HttpTask<>(requestHolder);
         try {
-            ThreadPoolManager.getInstance().excute(new FutureTask<Object>(httpTask,null));
+            ThreadPoolManager.getInstance().excute(new FutureTask<T>(httpTask,null));
         } catch (InterruptedException e) {
             e.printStackTrace();
             dataListener.onFailed();

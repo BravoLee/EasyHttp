@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">EasyHttpDemo</string>
+    <string name="result">这里是结果：</string>
 </resources>
